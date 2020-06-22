@@ -1,0 +1,10 @@
+Chinese
+Mathmatics
+English
+Physics
+Chemistry
+Biology
+Politics
+History
+Geography
+Computer
