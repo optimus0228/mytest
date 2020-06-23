@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="node_modules/babel-standalone/babel.min.js"></script>
+<script src="node_modules/prop-types/prop-types.js"></script>
+<body>
+    <div id="demoReact">
+
+    </div>
+    <script type="text/babel">
+        /* let myDom=<h1>Javascript and xml extend</h1>; */
+/*        function fun(){
+            let i=0;
+            let arr=["Chinese","Mathmatics","English","Physics","Chemistry","Biology","History","Geography","Polics","Medicine","Computer"];
+            let myDom=arr.map((item,index)=>{
+                return <p style={{color:i==index?'red':''}} key={index} onClick={()=>{i=index;console.log(i);render()}}>{item}</p>
+            })
+
+            return myDom;
+        }
+
+        function render(){
+            ReactDOM.render(fun(),document.getElementById("demoReact"));
+        }
+
+        render(); */ 
+
+/*         function MyComp(){
+            return(
+                <div>
+                    <h3>Javascript and xml</h3>
+                </div>
+            )
+        }
+
+        let comp=<MyComp/>; */
+
+        function Comp(props){
+            return (
+                <div>State Component ------ {props.name} ------- {props.age}</div>
+            )
+        }
+
+        Comp.defaultProps={
+            name:"The default value",
+            age:18
+        }
+
+        Comp.propTypes={
+            name:PropTypes.string,
+            age:PropTypes.number.isRequired
+        }
+
+        class CComp extends React.Component{
+            static defaultProps={
+                    name:"Edwin",
+                    age: 38,
+                    sex: "Male",
+                    skill: "Computer",
+                    occupacy: "Program"
+                }
+
+            render(){
+                return(
+                    <div>
+                        <h3>The class component : </h3> 
+                        <ul>
+                            <li>{this.props.name}</li> 
+                            <li>{this.props.age}</li> 
+                            <li>{this.props.sex}</li>
+                            <li>{this.props.skill}</li>
+                            <li>{this.props.occupacy}</li>
+                        </ul>
+                    </div>
+                )                
+            }
+        }
+
+        CComp.propTypes={
+            name:PropTypes.string,
+            age:PropTypes.number,
+            sex:PropTypes.string,
+            skill:PropTypes.string,
+            occupacy:PropTypes.string
+        }
+
+        let isDisplay=true;
+
+        let MyComp=(props)=>{
+            return(
+                <div style={{display:isDisplay?"block":"none"}}>
+                    {
+                        props.arr.map((v,i)=>{
+                            return <li key={i}>{v}</li>
+                        })
+                    }
+                </div>
+            )
+        }
+
+        let FComp=()=>{
+            return(
+                <div>
+                    <h1 onClick={()=>{isDisplay=!isDisplay;console.log(isDisplay);render()}}>Subject</h1>
+                    <MyComp arr={dataArr} />
+                </div>
+            )
+        }
+
+        let dataArr=["Chinese","Mathmatics","English","Physics","Chemistry"];
+        
+        //ReactDOM.render(<Comp/>,document.getElementById("demoReact"));
+        //ReactDOM.render(<CComp/>,document.getElementById("demoReact"));
+        function render(){
+            ReactDOM.render(<FComp/>,document.getElementById("demoReact"));
+        }
+
+        render();
+
+        class Coms1 extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    name:"shan",
+                    content:"<p>I think math is more interesting than any other subjects.<p>"
+                }
+            }
+
+            func=()=>{
+                this.setState({
+                    name:"zhang"
+                },()=>{
+                    console.log("data modified")
+                })
+            }
+
+            render(){
+                return (
+                    <div>
+                        <button onClick={this.func}>Click Me</button>
+                        <div>Javascript and xml = React  {this.state.name}</div>
+                        <div dangerouslySetInnerHTML={{__html:this.state.content}}></div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Coms1/>,document.getElementById("demoReact"));
+
+        class Coms2 extends React.Component {
+            constructor(props){
+                super(props);
+                this.myRef=React.createRef();
+            }
+
+            func1=()=>{
+                console.log(this.refs.demoInput.value);
+            }
+
+            func2=()=>{
+                console.log(this.textinput.value);
+            }
+
+            func3=()=>{
+                console.log(this.myRef.current.value);
+            }
+
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref="demoInput" placeholder="Please input string" />
+                        <button onClick={this.func1}>Click</button>
+                        <br/>
+                        <input type="text" ref={(input)=>{this.textinput=input}} placeholder="Please input string" />
+                        <button onClick={this.func2}>Click</button>
+                        <br />
+                        <input type="text" ref={this.myRef} placeholder="Please input string" />
+                        <button onClick={this.func3}>Click</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Coms2/>,document.getElementById("demoReact"));
+
+        class Coms3 extends React.Component {
+            constructor(props){
+                super(props);
+                this.func4c=this.func4c.bind(this);
+            }
+
+            func4a(){
+                console.log(this);
+            }
+
+            func4b=()=>{
+                console.log(this);
+            }
+
+            func4c(){
+                console.log(this);
+            }
+
+            func4d(){
+                console.log(this);
+            }
+
+            func4e=(i)=>{
+                console.log(i);
+            }
+
+            func4f=(msg,e)=>{
+                console.log(msg,e);
+            }
+
+            render(){
+                return(
+                    <div>
+                        <button onClick={this.func4a.bind(this)}>Click1</button><br/>
+                        <button onClick={this.func4b}>Click2</button><br/>
+                        <button onClick={this.func4c}>Click3</button><br/>
+                        <button onClick={()=>{this.func4d()}}>Click4</button><br/>
+                        <button onClick={this.func4e.bind(this,12)}>Click5</button><br/>
+                        <button onClick={(e)=>{this.func4f("message",e)}}>Click6</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Coms3/>,document.getElementById("demoReact"));
+
+    </script>
+</body>
+</html>
